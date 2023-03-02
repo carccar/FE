@@ -1,12 +1,12 @@
 import React from "react";
 
-const TodoListItem = ()  => {
+// const TodoListItem = ({item}:string | number) => {
 
-    return (
-        <li className="todo-item">
-            <p>aaa</p>
-        </li>
-    )
-}
+//     return (
+//         <li className="todo-item">
+//             <p>{item}</p>
+//         </li>
+//     )
+// }
 
-export default TodoListItem;
+// export default TodoListItem;

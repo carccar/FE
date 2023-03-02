@@ -1,5 +1,5 @@
 import React from "react";
-import { CountryType } from  './App';
+import { CountryType } from  '../pages/App';
 import CountryItem from "./CountryItem";
 
 type CountryListPropsType = {
@@ -10,7 +10,7 @@ const CountryList = (props:CountryListPropsType) => {
     
     const list = props.countries;
 
-    let countries  = list.map((item, index) => {
+    let countries  = list.map((item) => {
         return (
            <CountryItem
                 key={item.no}

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 // import App from './App';
-import Todo from './Todo';
+import Todo from './pages/Todo';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
