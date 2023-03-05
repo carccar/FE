@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./css/Todo.css";
-import TodoList from "../components/TodoList";
+// import TodoList from "../components/TodoList";
 
 type TodoItemType = {
   no: number;
@@ -61,7 +61,7 @@ const Todo = () => {
         </button>
       </div>
 
-      <TodoList todoList={todoList} />
+      {/* <TodoList todoList={todoList} /> */}
     </div>
   );
 };
