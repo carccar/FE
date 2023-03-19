@@ -140,9 +140,7 @@ export default function Todolist(){
         const newItemIndex = targetIndex + 1;
 
         newTodoList.splice(targetIndex, 1);
-        // newTodoList.splice(, 0, targetIndex);
         newTodoList.splice(newItemIndex, 0, currentItem);
-        // newTodoList.splice(targetIndex,)
         console.log(newTodoList);
         setTodoList(newTodoList)
     };
