@@ -94,8 +94,59 @@ export default function Todolist(){
             return item;
         });
         setTodoList(newTodoList);
-        console.log(newTodoList);
     }
+
+    //위치 이동 up
+    const upMove = (no: number) => {
+        // 1. 해당 인덱스를 찾아서 
+        // 2. 인덱스 -1 하고 
+        // 3. 새로 배열 만들기
+        const targetIndex = todoList.findIndex((item) => item.no === no);
+        
+        if(targetIndex === 0) {
+            return;
+        }
+
+        // const newTodoList = [...todoList];
+        // const currentItem = newTodoList[targetIndex];
+        // newTodoList[targetIndex] = newTodoList[targetIndex - 1];
+        // newTodoList[targetIndex - 1] = currentItem;
+        // setTodoList(newTodoList);
+
+        const newTodoList = [...todoList];
+        const currentItem = newTodoList[targetIndex];
+        const newItemIndex = targetIndex - 1;
+
+        newTodoList.splice(targetIndex, 1);
+        // newTodoList.splice(, 0, targetIndex);
+        newTodoList.splice(newItemIndex, 0, currentItem);
+        // newTodoList.splice(targetIndex,)
+        console.log(newTodoList);
+        setTodoList(newTodoList)
+    };
+
+    //위치 이동 down
+    const upDown = (no: number) => {
+        // 1. 해당 인덱스를 찾아서 
+        // 2. 인덱스 -1 하고 
+        // 3. 새로 배열 만들기
+        const targetIndex = todoList.findIndex((item) => item.no === no);
+        const lastIndex = todoList.length -1;
+        if(targetIndex == lastIndex) {
+            return;
+        }
+        const newTodoList = [...todoList];
+        const currentItem = newTodoList[targetIndex];
+        const newItemIndex = targetIndex + 1;
+
+        newTodoList.splice(targetIndex, 1);
+        // newTodoList.splice(, 0, targetIndex);
+        newTodoList.splice(newItemIndex, 0, currentItem);
+        // newTodoList.splice(targetIndex,)
+        console.log(newTodoList);
+        setTodoList(newTodoList)
+    };
+    
 
     return (
         <div className={styles.wrap}>
@@ -128,6 +179,12 @@ export default function Todolist(){
                                 </button>
                                 <button type="button" onClick={() => {doneItem(item.no)}}>
                                     완료
+                                </button>
+                                <button type="button" onClick={() => {upMove(item.no)}}>
+                                    ⬆️
+                                </button>
+                                <button type="button" onClick={() => {upDown(item.no)}}>
+                                    ⬇️
                                 </button>
                             </li>
                         )
