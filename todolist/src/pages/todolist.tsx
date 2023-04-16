@@ -1,18 +1,28 @@
 import styles from '@/styles/todo.module.scss';
 import { useState } from 'react';
+import { atom, useAtom } from 'jotai';
 
 type TodoItemType = {
     no: number,
     todo: number | string,
     done: boolean
 }
+const inputValueAtom = atom<string | number>('');
+const todoListAtom = atom<TodoItemType[]>([]);
+const countAtom = atom<number>(1);
+const editNoAtom = atom<number | null>(null);
+
 
 export default function Todolist(){
 
-    const [inputValue, setInputValue] = useState<string | number>('');
-    const [todoList, setTodoList] = useState<TodoItemType[]>([]);
-    const [count, setCount] = useState<number>(1);
-    const [editNo, setEditNo] = useState<number | null>(null);
+    // const [inputValue, setInputValue] = useState<string | number>('');
+    // const [todoList, setTodoList] = useState<TodoItemType[]>([]);
+    // const [count, setCount] = useState<number>(1);
+    // const [editNo, setEditNo] = useState<number | null>(null);
+    const [inputValue, setInputValue] = useAtom(inputValueAtom);
+    const [todoList, setTodoList] = useAtom(todoListAtom);
+    const [count, setCount] = useAtom(countAtom);
+    const [editNo, setEditNo] = useAtom(editNoAtom);
 
     const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if(e.key === 'Enter') {
@@ -24,6 +34,8 @@ export default function Todolist(){
         const inputValue = e.target.value;
         setInputValue(inputValue)
     }
+
+
 
     //todo 추가
     const addItem = () => {
@@ -63,6 +75,8 @@ export default function Todolist(){
         setCount(count + 1);
         setInputValue('');
         // console.log(todoList);
+
+        localStorage.setItem('todoList', JSON.stringify(todoList));
     }
 
     //todo 삭제
@@ -98,38 +112,27 @@ export default function Todolist(){
 
     //위치 이동 up
     const upMove = (no: number) => {
-        // 1. 해당 인덱스를 찾아서 
-        // 2. 인덱스 -1 하고 
-        // 3. 새로 배열 만들기
+
         const targetIndex = todoList.findIndex((item) => item.no === no);
         
         if(targetIndex === 0) {
             return;
         }
 
-        // const newTodoList = [...todoList];
-        // const currentItem = newTodoList[targetIndex];
-        // newTodoList[targetIndex] = newTodoList[targetIndex - 1];
-        // newTodoList[targetIndex - 1] = currentItem;
-        // setTodoList(newTodoList);
-
         const newTodoList = [...todoList];
         const currentItem = newTodoList[targetIndex];
         const newItemIndex = targetIndex - 1;
 
         newTodoList.splice(targetIndex, 1);
-        // newTodoList.splice(, 0, targetIndex);
+
         newTodoList.splice(newItemIndex, 0, currentItem);
-        // newTodoList.splice(targetIndex,)
-        console.log(newTodoList);
+
         setTodoList(newTodoList)
     };
 
     //위치 이동 down
     const upDown = (no: number) => {
-        // 1. 해당 인덱스를 찾아서 
-        // 2. 인덱스 -1 하고 
-        // 3. 새로 배열 만들기
+
         const targetIndex = todoList.findIndex((item) => item.no === no);
         const lastIndex = todoList.length -1;
         if(targetIndex == lastIndex) {
@@ -141,7 +144,7 @@ export default function Todolist(){
 
         newTodoList.splice(targetIndex, 1);
         newTodoList.splice(newItemIndex, 0, currentItem);
-        console.log(newTodoList);
+
         setTodoList(newTodoList)
     };
     
