@@ -11,9 +11,8 @@ function App() {
     <>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Index />}>
-          <Route path="/Todo" element={<Todo />} />
-        </Route>
+        <Route path="/" element={<Index />} />
+        <Route path="/Todo" element={<Todo />} />
       </Routes>
     </BrowserRouter>
     {/* <Todo /> */}
